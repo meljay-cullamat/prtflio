@@ -1,0 +1,996 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meljay Cullamat | BSIT Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #090a14;
+    --panel: rgba(255,255,255,0.04);
+    --panel-strong: rgba(255,255,255,0.08);
+    --accent: #7c5cfc;
+    --accent2: #00e5ff;
+    --accent3: #ff6b9d;
+    --text: #eef0ff;
+    --muted: #8c94b4;
+    --border: rgba(255,255,255,0.08);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100vh;
+    font-family: var(--sans);
+    background: radial-gradient(circle at top left, rgba(124,92,252,0.18), transparent 25%),
+                radial-gradient(circle at bottom right, rgba(0,229,255,0.12), transparent 22%),
+                linear-gradient(180deg, #07080f 0%, #090a14 100%);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+                      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 120px 120px;
+    pointer-events: none;
+    opacity: 0.25;
+  }
+  nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(9,10,20,0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    font-family: var(--mono);
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover {
+    color: var(--accent2);
+  }
+  .hero {
+    min-height: 100vh;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    display: grid;
+    align-items: center;
+  }
+  .hero-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .hero-copy {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.24em;
+    color: var(--accent2);
+    text-transform: uppercase;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--accent2);
+  }
+  .hero-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 0.95;
+    max-width: 10ch;
+    letter-spacing: -0.04em;
+  }
+  .hero-title span {
+    display: inline-block;
+    color: var(--accent);
+    background: rgba(124,92,252,0.12);
+    padding: 0.35rem 0.55rem;
+    border-radius: 1.25rem;
+  }
+  .hero-subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.85;
+    max-width: 620px;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+    border-radius: 999px;
+    padding: 0.95rem 1.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+  }
+  .button-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #07080f;
+    box-shadow: 0 18px 45px rgba(124,92,252,0.18);
+  }
+  .button-secondary {
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .button:hover {
+    transform: translateY(-2px);
+  }
+  .hero-panel {
+    position: relative;
+    padding: 2.5rem;
+    border-radius: 32px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+  }
+  .hero-panel::before,
+  .hero-panel::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(26px);
+    opacity: 0.7;
+  }
+  .hero-panel::before {
+    width: 180px;
+    height: 180px;
+    top: -40px;
+    right: -40px;
+    background: rgba(124,92,252,0.16);
+  }
+  .hero-panel::after {
+    width: 140px;
+    height: 140px;
+    bottom: -40px;
+    left: -35px;
+    background: rgba(0,229,255,0.12);
+  }
+  .panel-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    color: var(--accent2);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.2rem;
+  }
+  .panel-badge span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 8px rgba(124,92,252,0.12);
+  }
+  .panel-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  .panel-copy {
+    color: var(--muted);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+  }
+  .panel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .stat-card {
+    position: relative;
+    padding: 1.35rem 1.25rem;
+    border-radius: 26px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, transparent 40%, rgba(124,92,252,0.08) 60%, transparent 78%);
+    pointer-events: none;
+  }
+  .stat-content {
+    position: relative;
+    z-index: 1;
+  }
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-label {
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  section {
+    padding: 7rem 2rem;
+    position: relative;
+  }
+  .section-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .section-caption {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-size: clamp(2rem, 3vw, 3rem);
+    margin: 0.8rem 0 1.5rem;
+    line-height: 1.05;
+  }
+  .section-divider {
+    width: 7rem;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 999px;
+    margin-bottom: 3rem;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .about-card {
+    position: relative;
+    padding: 2.5rem;
+    border-radius: 32px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    top: -40px;
+    right: -30px;
+    background: rgba(255,107,157,0.12);
+    filter: blur(22px);
+  }
+  .about-copy p {
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+  }
+  .about-copy p span {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .info-list {
+    display: grid;
+    gap: 1rem;
+  }
+  .info-card {
+    padding: 1rem 1.2rem;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .info-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+  .info-value {
+    font-size: 0.96rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .skills-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .skill-panel {
+    position: relative;
+    padding: 2rem;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+  }
+  .skill-panel::before,
+  .skill-panel::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+  .skill-panel::before {
+    width: 140px;
+    height: 140px;
+    top: -32px;
+    right: -32px;
+    background: rgba(0,229,255,0.1);
+  }
+  .skill-panel::after {
+    width: 110px;
+    height: 110px;
+    bottom: -26px;
+    left: -20px;
+    background: rgba(124,92,252,0.1);
+  }
+  .skill-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .skill-desc {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+  }
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .skill-pill {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text);
+  }
+  .skill-strength {
+    margin-top: 1.2rem;
+  }
+  .strength-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .strength-name {
+    font-size: 0.88rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .progress-track {
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .project-card {
+    margin-bottom: 1.5rem;
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: grid;
+    gap: 0;
+  }
+  .project-card::before,
+  .project-card::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+  .project-card::before {
+    width: 180px;
+    height: 180px;
+    top: -40px;
+    right: -40px;
+    background: rgba(0,229,255,0.08);
+  }
+  .project-card::after {
+    width: 140px;
+    height: 140px;
+    bottom: -40px;
+    left: -40px;
+    background: rgba(124,92,252,0.08);
+  }
+  .project-preview {
+    min-height: 220px;
+    padding: 2rem 1.5rem 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(12,13,22,0.92), rgba(16,17,30,0.95));
+  }
+  .mock-browser, .mock-pf {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 24px;
+    background: #0b0c16;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .mock-bar {
+    height: 2.5rem;
+    background: #121426;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+  .mock-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+  }
+  .mock-body {
+    padding: 1rem;
+  }
+  .mock-nav-strip {
+    width: 60%;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    margin-bottom: 1rem;
+  }
+  .mock-hero-strip {
+    width: 48%;
+    height: 1.4rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.07);
+    margin-bottom: 1rem;
+  }
+  .mock-cards {
+    display: flex;
+    gap: 0.6rem;
+  }
+  .mock-card {
+    flex: 1;
+    height: 3rem;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.04);
+  }
+  .mock-card-tall {
+    height: 5rem;
+  }
+  .mock-pf-top {
+    height: 2.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1rem;
+    background: #101226;
+  }
+  .mock-pf-body {
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+  }
+  .mock-pf-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .mock-pf-avatar {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+  }
+  .mock-pf-line {
+    height: 0.55rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+  }
+  .mock-pf-line-sm {
+    height: 0.4rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+  }
+  .mock-pf-right {
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .mock-pf-skill {
+    height: 0.5rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .project-card-body {
+    padding: 1.7rem 1.7rem 2rem;
+    display: grid;
+    gap: 1rem;
+  }
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .project-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(0,229,255,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(0,229,255,0.18);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+  }
+  .project-copy {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .project-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text);
+  }
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .project-button {
+    padding: 0.85rem 1rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .project-button:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.08);
+  }
+  .contact-panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2rem;
+    padding: 2.5rem;
+    border-radius: 32px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(18px);
+  }
+  .contact-panel::before {
+    content: '';
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    top: -60px;
+    right: -60px;
+    border-radius: 50%;
+    background: rgba(255,107,157,0.1);
+    filter: blur(28px);
+  }
+  .contact-copy {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1rem;
+  }
+  .contact-copy h2 {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    margin: 0;
+    line-height: 1.05;
+  }
+  .contact-copy span {
+    color: var(--accent);
+  }
+  .contact-copy p {
+    color: var(--muted);
+    line-height: 1.85;
+    max-width: 620px;
+  }
+  .contact-links {
+    display: grid;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .contact-item:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(124,92,252,0.2);
+  }
+  .contact-item svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--accent);
+  }
+  footer {
+    padding: 2rem 2rem 3rem;
+    text-align: center;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+  footer span {
+    color: var(--accent);
+  }
+  @media (max-width: 1024px) {
+    .hero-inner,
+    .about-grid,
+    .skills-grid,
+    .contact-panel {
+      grid-template-columns: 1fr;
+    }
+    .hero {
+      padding-top: 10rem;
+    }
+    .panel-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 720px) {
+    nav {
+      padding: 1rem 1.2rem;
+    }
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.78rem;
+    }
+    .hero-inner {
+      gap: 2rem;
+    }
+    .hero-panel {
+      padding: 1.8rem;
+    }
+    .button {
+      min-width: 140px;
+    }
+    section {
+      padding: 5rem 1.5rem;
+    }
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+    .panel-grid,
+    .project-links {
+      grid-template-columns: 1fr;
+    }
+    .project-card {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Meljay Cullamat</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">BSIT · Information Technology · Batch 2025</div>
+      <h1 class="hero-title">I design<br><span>digital experiences</span><br>that feel alive.</h1>
+      <p class="hero-subtitle">As a BSIT student and frontend creator, I build responsive interfaces, modern web apps, and polished UI systems with React, JavaScript, and Figma.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#projects">See Projects</a>
+        <a class="button button-secondary" href="#contact">Talk With Me</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="panel-badge"><span></span>Profile Snapshot</div>
+      <h2 class="panel-title">Meljay Cullamat</h2>
+      <p class="panel-copy">A creative problem solver focused on crafting interfaces that look sophisticated and work intuitively. I bring design thinking into every line of code.</p>
+      <div class="panel-grid">
+        <div class="stat-card">
+          <div class="stat-content">
+            <div class="stat-value">3+</div>
+            <div class="stat-label">Years Studying</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div class="stat-value">5+</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Core Tools</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Curiosity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner">
+    <div class="section-caption">// 01. about me</div>
+    <h2 class="section-title">A fresh perspective on web design.</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-card about-copy">
+        <p>I'm a <span>BSIT student</span> who loves turning ideas into websites that are polished, accessible, and memorable. I focus on clean layouts, fast interactions, and a strong visual voice.</p>
+        <p>I build with <span>React</span> and <span>JavaScript</span>, then polish the experience using <span>Figma</span> and modern design patterns. Every project is an opportunity to blend structure with creativity.</p>
+        <p>My goal is to become a <span>full-stack developer</span> who bridges design and code, delivering products that feel professional and personal.</p>
+      </div>
+      <div class="info-list">
+        <div class="info-card"><div class="info-label">Full Name</div><div class="info-value">Meljay Cullamat</div></div>
+        <div class="info-card"><div class="info-label">Email</div><div class="info-value">meljay@email.com</div></div>
+        <div class="info-card"><div class="info-label">Location</div><div class="info-value">Davao City, Philippines</div></div>
+        <div class="info-card"><div class="info-label">Course</div><div class="info-value">BSIT – Information Technology</div></div>
+        <div class="info-card"><div class="info-label">Year</div><div class="info-value">3rd Year · Batch 2025</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-caption">// 02. skills</div>
+    <h2 class="section-title">Tools and techniques I rely on.</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-panel">
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-desc">The foundation of modern web interaction. I use it to build dynamic workflows, smooth animations, and responsive interfaces.</div>
+        <div class="skill-list">
+          <span class="skill-pill">ES6+</span>
+          <span class="skill-pill">DOM</span>
+          <span class="skill-pill">Async</span>
+          <span class="skill-pill">Fetch</span>
+          <span class="skill-pill">JSON</span>
+        </div>
+      </div>
+      <div class="skill-panel">
+        <div class="skill-name">React</div>
+        <div class="skill-desc">Component-based UI with reusable patterns, state-driven interfaces, and scalable single-page experiences.</div>
+        <div class="skill-list">
+          <span class="skill-pill">Components</span>
+          <span class="skill-pill">Hooks</span>
+          <span class="skill-pill">Routing</span>
+          <span class="skill-pill">Props</span>
+          <span class="skill-pill">State</span>
+        </div>
+      </div>
+      <div class="skill-panel">
+        <div class="skill-name">Design & Product</div>
+        <div class="skill-desc">User-first interfaces built with strong visual systems, wireframes, and prototypes that guide every interaction.</div>
+        <div class="skill-list">
+          <span class="skill-pill">Figma</span>
+          <span class="skill-pill">UI</span>
+          <span class="skill-pill">Prototypes</span>
+          <span class="skill-pill">Layouts</span>
+          <span class="skill-pill">Systems</span>
+        </div>
+      </div>
+    </div>
+    <div class="skills-grid" style="margin-top:1.5rem; grid-template-columns: 1fr 1fr;">
+      <div class="skill-panel">
+        <div class="skill-name">Skill Progress</div>
+        <div class="strength-row"><span class="strength-name">HTML & CSS</span><span>90%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:90%"></div></div>
+        <div class="strength-row"><span class="strength-name">Figma</span><span>85%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:85%"></div></div>
+        <div class="strength-row"><span class="strength-name">JavaScript</span><span>80%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
+        <div class="strength-row"><span class="strength-name">React</span><span>70%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-panel" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="skill-name">Why I build</div>
+        <div class="skill-desc">I design with clarity, code with purpose, and build websites that people enjoy using. Every interface should feel fast, intuitive, and polished.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-caption">// 03. projects</div>
+    <h2 class="section-title">Projects that showcase my craft.</h2>
+    <div class="section-divider"></div>
+    <div class="project-card">
+      <div class="project-preview">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <div class="mock-dot" style="background:#ff5f57"></div>
+            <div class="mock-dot" style="background:#febc2e"></div>
+            <div class="mock-dot" style="background:#28c840"></div>
+            <div style="flex:1"></div>
+            <div class="mock-dot" style="width:0.35rem; height:0.35rem; background:rgba(255,255,255,0.35);"></div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-nav-strip"></div>
+            <div class="mock-hero-strip"></div>
+            <div class="mock-cards">
+              <div class="mock-card mock-card-tall"></div>
+              <div class="mock-card"></div>
+              <div class="mock-card"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+          <div class="project-title">Personal Blog Website</div>
+          <span class="project-badge">Website</span>
+        </div>
+        <div class="project-copy">A responsive personal blog built for sharing tech articles and study notes. It features a clean layout, category filters, and a dark mode-ready design.</div>
+        <div class="project-stack"><span class="project-tag">React</span><span class="project-tag">JavaScript</span><span class="project-tag">CSS Modules</span><span class="project-tag">Figma</span></div>
+        <div class="project-links">
+          <a class="project-button" href="#" target="_blank">GitHub</a>
+          <a class="project-button" href="#" target="_blank">Live Demo</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-preview">
+        <div class="mock-pf">
+          <div class="mock-pf-top">
+            <div class="mock-dot" style="background:#ff5f57"></div>
+            <div class="mock-dot" style="background:#febc2e"></div>
+            <div class="mock-dot" style="background:#28c840"></div>
+          </div>
+          <div class="mock-pf-body">
+            <div class="mock-pf-left">
+              <div class="mock-pf-avatar"></div>
+              <div class="mock-pf-line" style="width:82%"></div>
+              <div class="mock-pf-line" style="width:60%; background:rgba(255,107,157,0.3)"></div>
+              <div class="mock-pf-line-sm" style="width:92%"></div>
+              <div class="mock-pf-line-sm" style="width:72%"></div>
+            </div>
+            <div class="mock-pf-right">
+              <div class="mock-pf-skill" style="width:100%"></div>
+              <div class="mock-pf-skill" style="width:78%"></div>
+              <div class="mock-pf-skill" style="width:90%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+          <div class="project-title">Online Portfolio</div>
+          <span class="project-badge">Design + Dev</span>
+        </div>
+        <div class="project-copy">A polished personal portfolio designed in Figma and built with React. It highlights projects, skills, and contact details with a sleek dark aesthetic.</div>
+        <div class="project-stack"><span class="project-tag">React</span><span class="project-tag">JavaScript</span><span class="project-tag">Figma</span><span class="project-tag">CSS</span></div>
+        <div class="project-links">
+          <a class="project-button" href="#" target="_blank">GitHub</a>
+          <a class="project-button" href="#" target="_blank">Live Demo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-caption">// 04. contact</div>
+    <h2 class="section-title">Let’s turn your idea into a site.</h2>
+    <div class="section-divider"></div>
+    <div class="contact-panel">
+      <div class="contact-copy">
+        <h2>Open to <span>opportunities</span></h2>
+        <p>Whether it’s an internship, freelance project, or a conversation about design and development, I’m always ready to collaborate and learn.</p>
+        <a class="button button-primary" href="mailto:meljay@email.com">Send Email</a>
+      </div>
+      <div class="contact-links">
+        <a class="contact-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>github.com/meljaycullamat</a>
+        <a class="contact-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>linkedin.com/in/meljaycullamat</a>
+        <a class="contact-item" href="mailto:meljay@email.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>meljay@email.com</a>
+        <a class="contact-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Davao City, Philippines</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with 💜 by <span>Meljay Cullamat</span> · BSIT · Davao City</p>
+  <p style="margin-top:6px; font-size:11px; opacity:0.5;">© 2025 All rights reserved</p>
+</footer>
+
+</body>
+</html>
