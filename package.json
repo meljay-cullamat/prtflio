@@ -1,0 +1,13 @@
+{
+  "name": "meljay-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static portfolio website",
+  "scripts": {
+    "start": "npx serve .",
+    "open": "start .",
+    "build": "echo \"No build step needed for this static site.\""
+  },
+  "author": "",
+  "license": "MIT"
+}
